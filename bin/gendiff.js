@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { program } from 'commander'
 import { readFile } from '../src/cli.js';
+import { compareObjects } from '../src/index.js';
 
 program
   .name('gendiff')
@@ -11,8 +12,9 @@ program
   .argument('<filepath2>', 'second file')
   .option('-f, --format [type]', 'output format')
   .action((filepath1, filepath2) => {
-    console.log(readFile(filepath1));
-    console.log(readFile(filepath2));
+    const obj1 = JSON.parse(readFile(filepath1)); // console.log(obj1 instanceof Object);
+    const obj2 = JSON.parse(readFile(filepath2)); // console.log(obj1, obj2);
+    compareObjects (obj1, obj2);
   })
 
 program.parse()
