@@ -12,8 +12,8 @@ program
   .argument("<filepath2>", "second file")
   .option("-f, --format [type]", "output format")
   .action((filepath1, filepath2) => {
-    const obj1 = JSON.parse(readFile(filepath1)); // console.log(obj1 instanceof Object);
-    const obj2 = JSON.parse(readFile(filepath2)); // console.log(obj1, obj2);
+    const obj1 = JSON.parse(readFile(filepath1));
+    const obj2 = JSON.parse(readFile(filepath2));
     compareObjects(obj1, obj2);
   });
 
