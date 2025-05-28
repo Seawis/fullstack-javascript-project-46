@@ -1,4 +1,4 @@
-name: mysels-actions
+name: code-climate
 
 on: push
 
@@ -11,7 +11,7 @@ jobs:
       - uses: actions/setup-node@v4
       - run: npm install
       - uses: qltysh/qlty-action/coverage@v1
-      with:
-        token: {{secrets.QLTY_COVERAGE_TOKEN}}
-        files: target/lcov.info
+          with:
+          token: {{secrets.QLTY_COVERAGE_TOKEN}}
+          files: target/lcov.info
 
