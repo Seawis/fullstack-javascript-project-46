@@ -1,7 +1,8 @@
 name: code-climate
-
-on: push
-
+on:
+  push:
+    branches:
+      - main
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -11,7 +12,6 @@ jobs:
       - uses: actions/setup-node@v4
       - run: npm install
       - uses: qltysh/qlty-action/coverage@v1
-          with:
-          token: {{secrets.QLTY_COVERAGE_TOKEN}}
+        with:
+          token: secrets.QLTY_COVERAGE_TOKEN
           files: target/lcov.info
-
