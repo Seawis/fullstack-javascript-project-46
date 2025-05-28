@@ -1,3 +1,4 @@
-test("test", () => {
-  expect("").toEqual("");
-});
+/* eslint no-undef: "off" */
+test('test', () => {
+  expect('').toEqual('')
+})

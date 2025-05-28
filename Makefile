@@ -11,13 +11,13 @@ publish:
 	npm publish --dry-run
 
 lint:
-	npx eslint .
+	npx eslint --fix .
 
 test:
-	NODE_OPTIONS=--experimental-vm-modules npx jest
+	npx jest
 
 test-watch:
-	NODE_OPTIONS=--experimental-vm-modules npx jest --watch
+	npx jest --watch
 
 test-coverage:
-	NODE_OPTIONS=--experimental-vm-modules npm test -- --coverage
+	npm test -- --coverage
