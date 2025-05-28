@@ -10,7 +10,7 @@ const compareObjects = (obj1, obj2) => {
     const inBoth = '    '
     const inFirst = '  - '
     const inSecond = '  + '
-    if (Object.hasOwn(obj1, key) & Object.hasOwn(obj2, key)) {
+    if (Object.hasOwn(obj1, key) && Object.hasOwn(obj2, key)) {
       acc += obj1[key] === obj2[key]
         ? `${inBoth}${key}: ${obj1[key]}\n`
         : `${inFirst}${key}: ${obj1[key]}\n${inSecond}${key}: ${obj2[key]}\n`
