@@ -12,7 +12,7 @@ test('isObject', () => {
   const filepath1 = getFixturePath('file1.json')
   const filepath2 = getFixturePath('file1.yaml')
   const filepath3 = getFixturePath('file2.yml')
-  const filepath4 = getFixturePath('file12result')
+  const filepath4 = getFixturePath('fileResult.txt')
 
   expect(getObject(filepath1) instanceof Object).toBeTruthy()
   expect(getObject(filepath2) instanceof Object).toBeTruthy()
