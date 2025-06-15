@@ -9,7 +9,7 @@ const compareObjects = (obj1, obj2, formatType) => {
     ]).sort()
 
     const result = getAllKeys.reduce((acc, key) => {
-      const fullKey = `${parent}.${key}`
+      const fullKey = deep === 1 ? `${parent}${key}` : `${parent}.${key}`
       if (Object.hasOwn(obj1, key) && Object.hasOwn(obj2, key)) {
         if (_.isObject(obj1[key]) && _.isObject(obj2[key])) {
           acc = [
@@ -30,16 +30,16 @@ const compareObjects = (obj1, obj2, formatType) => {
         }
       }
       else if (Object.hasOwn(obj1, key)) {
-        acc = [...acc, { key: fullKey, value: obj1[key], where: 'inFirst', level: deep }] // значение есть только в первом файле
+        acc = [...acc, { key: fullKey, value: obj1[key], where: 'inFirstOnly', level: deep }] // значение есть только в первом файле
       }
       else {
-        acc = [...acc, { key: fullKey, value: obj2[key], where: 'inSecond', level: deep }] // значение есть только во втором файле
+        acc = [...acc, { key: fullKey, value: obj2[key], where: 'inSecondOnly', level: deep }] // значение есть только во втором файле
       }
       return acc
     }, [])
-    return _.flattenDeep(result) // .forEach(item => item.key = _.has(item, item.key) ? item.key.slice(-1) : null))
+    return _.flattenDeep(result)
   }
-  console.log(diffs(obj1, obj2))
+  // console.log(diffs(obj1, obj2))
   return format(diffs(obj1, obj2), formatType)
 }
 

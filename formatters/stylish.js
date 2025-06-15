@@ -23,7 +23,7 @@ export default (diffs) => {
 
   const result = diffs.reduce((acc, item) => {
     const left = sym.repeat(4 * item.level - 2)
-    const newKey = Object.hasOwn(item, item.key)
+    const newKey = Object.hasOwn(item, 'key')
       ? item.key.split('.').slice(-1)
       : null
     const value = _.isObject(item.value)
@@ -34,7 +34,9 @@ export default (diffs) => {
       compareObj: `${left}  ${newKey}: {\n`,
       inBoth: `${left}  ${newKey}: ${value}\n`,
       inFirst: `${left}- ${newKey}: ${value}\n`,
+      inFirstOnly: `${left}- ${newKey}: ${value}\n`,
       inSecond: `${left}+ ${newKey}: ${value}\n`,
+      inSecondOnly: `${left}+ ${newKey}: ${value}\n`,
       end: `${left}  }\n`,
     }
 
