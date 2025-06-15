@@ -11,6 +11,6 @@ export default (filepath) => {
     case '.yaml':
       return yaml.load(readFile(filepath))
     default:
-      console.log('Incorrect file extension')
+      throw new Error('Incorrect file extension')
   }
 }

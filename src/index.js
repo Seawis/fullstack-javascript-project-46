@@ -1,40 +1,46 @@
 import _ from 'lodash'
-import { stringify, stylish } from '../src/style.js'
+import format from '../formatters/index.js'
 
-const compareObjects = (obj1, obj2, deep = 1) => {
-  const getAllKeys = _.uniq([
-    ...Object.keys(obj1),
-    ...Object.keys(obj2),
-  ]).sort()
+const compareObjects = (obj1, obj2, formatType) => {
+  const diffs = (obj1, obj2, deep = 1, parent = '') => {
+    const getAllKeys = _.uniq([
+      ...Object.keys(obj1),
+      ...Object.keys(obj2),
+    ]).sort()
 
-  const s = stylish(' ', deep)
-
-  const diff = getAllKeys.reduce((acc, key) => {
-    const value1 = stringify(obj1[key], s.shift, '    ')
-    const value2 = stringify(obj2[key], s.shift, '    ')
-
-    if (Object.hasOwn(obj1, key) && Object.hasOwn(obj2, key)) {
-      if (_.isObject(obj1[key]) && _.isObject(obj2[key])) {
-        const level = deep + 1
-        acc += `${s.inBoth}${key}: ${compareObjects(obj1[key], obj2[key], level)}\n`
+    const result = getAllKeys.reduce((acc, key) => {
+      const fullKey = `${parent}.${key}`
+      if (Object.hasOwn(obj1, key) && Object.hasOwn(obj2, key)) {
+        if (_.isObject(obj1[key]) && _.isObject(obj2[key])) {
+          acc = [
+            ...acc,
+            { key: fullKey, where: 'compareObj', level: deep },
+            diffs(obj1[key], obj2[key], deep + 1, fullKey),
+            { where: 'end', level: deep },
+          ] // значение (объект) есть в обоих файлах, рекурсия
+        }
+        else {
+          acc = obj1[key] === obj2[key]
+            ? [...acc, { key: fullKey, value: obj1[key], where: 'inBoth', level: deep }] // значения в обоих файлах совпадают
+            : [
+                ...acc,
+                { key: fullKey, value: obj1[key], where: 'inFirst', level: deep },
+                { key: fullKey, value: obj2[key], where: 'inSecond', level: deep },
+              ] // значения в обоих файлах НЕ совпадают
+        }
+      }
+      else if (Object.hasOwn(obj1, key)) {
+        acc = [...acc, { key: fullKey, value: obj1[key], where: 'inFirst', level: deep }] // значение есть только в первом файле
       }
       else {
-        acc
-          += obj1[key] === obj2[key]
-            ? `${s.inBoth}${key}: ${value1}\n`
-            : `${s.inFirst}${key}: ${value1}\n${s.inSecond}${key}: ${value2}\n`
+        acc = [...acc, { key: fullKey, value: obj2[key], where: 'inSecond', level: deep }] // значение есть только во втором файле
       }
-    }
-    else if (Object.hasOwn(obj1, key)) {
-      acc += `${s.inFirst}${key}: ${value1}\n`
-    }
-    else {
-      acc += `${s.inSecond}${key}: ${value2}\n`
-    }
-    return acc
-  }, '')
-
-  return `{\n${diff}${s.atTheEnd}}`
+      return acc
+    }, [])
+    return _.flattenDeep(result) // .forEach(item => item.key = _.has(item, item.key) ? item.key.slice(-1) : null))
+  }
+  console.log(diffs(obj1, obj2))
+  return format(diffs(obj1, obj2), formatType)
 }
 
 export { compareObjects }
