@@ -3,7 +3,7 @@ import { fileURLToPath } from 'url'
 import path, { dirname } from 'path'
 import yaml from 'js-yaml'
 
-import { compareObjects } from '../src/index.js'
+import { compareObjects } from '../src/compare.js'
 import { readFile } from '../src/cli.js'
 
 const __filename = fileURLToPath(import.meta.url)
@@ -26,10 +26,20 @@ test('compareNestedJSON', () => {
   const file1 = JSON.parse(readFile(getFixturePath('file1nested.json')))
   const file2 = JSON.parse(readFile(getFixturePath('file2nested.json')))
   expect(compareObjects(file1, file2)).toEqual(readFile(getFixturePath('fileNested.txt')))
+  expect(compareObjects(file1, file2, 'stylish')).toEqual(readFile(getFixturePath('fileNested.txt')))
 })
 
 test('compareNestedYML', () => {
   const file1 = yaml.load(readFile(getFixturePath('file1nested.yaml')))
   const file2 = yaml.load(readFile(getFixturePath('file2nested.yml')))
   expect(compareObjects(file1, file2)).toEqual(readFile(getFixturePath('fileNested.txt')))
+  expect(compareObjects(file1, file2, 'plain')).toEqual(readFile(getFixturePath('filePlain.txt')))
+})
+
+test('boom!', () => {
+  const file1 = yaml.load(readFile(getFixturePath('file1nested.yaml')))
+  const file2 = yaml.load(readFile(getFixturePath('file2nested.yml')))
+  expect(() => {
+    compareObjects(file1, file2, 'stylishplain')
+  }).toThrow()
 })

@@ -18,5 +18,5 @@ test('isObject', () => {
   expect(getObject(filepath2) instanceof Object).toBeTruthy()
   expect(getObject(filepath3) instanceof Object).toBeTruthy()
 
-  expect(getObject(filepath4) instanceof Object).toBeFalsy()
+  expect(() => getObject(filepath4) instanceof Object).toThrow()
 })

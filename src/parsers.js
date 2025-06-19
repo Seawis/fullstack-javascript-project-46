@@ -4,6 +4,7 @@ import yaml from 'js-yaml'
 
 export default (filepath) => {
   let ext = path.extname(getFilePath(filepath))
+
   switch (ext) {
     case '.json':
       return JSON.parse(readFile(filepath))

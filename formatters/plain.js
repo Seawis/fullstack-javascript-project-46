@@ -27,5 +27,5 @@ export default (diffs) => {
 
     acc += rates[item.where]
     return acc
-  }, '')
+  }, '').trim()
 }

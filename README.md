@@ -7,6 +7,6 @@
 
 [![Build](https://github.com/Seawis/fullstack-javascript-project-46/actions/workflows/build.yml/badge.svg)](https://github.com/Seawis/fullstack-javascript-project-46/actions/workflows/build.yml) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Seawis_fullstack-javascript-project-46&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Seawis_fullstack-javascript-project-46)
 
-
-
 [![asciicast](https://asciinema.org/a/720945.svg)](https://asciinema.org/a/720945)
+
+[![asciicast](https://asciinema.org/a/723767.svg)](https://asciinema.org/a/723767)

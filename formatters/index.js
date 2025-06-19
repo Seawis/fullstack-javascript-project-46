@@ -6,6 +6,7 @@ export default (diffs, formatType) => {
   const rates = {
     stylish: stylish(diffs),
     plain: plain(diffs),
+    undefined: stylish(diffs),
   }
 
   if (!_.has(rates, [formatType])) {

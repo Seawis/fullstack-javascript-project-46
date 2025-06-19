@@ -29,14 +29,15 @@ export default (diffs) => {
     const value = _.isObject(item.value)
       ? stringify('value', item, sym, item.level)
       : item.value
+    const result = el => `${left}${el}${newKey}: ${value}\n`
 
     const rates = {
       compareObj: `${left}  ${newKey}: {\n`,
-      inBoth: `${left}  ${newKey}: ${value}\n`,
-      inFirst: `${left}- ${newKey}: ${value}\n`,
-      inFirstOnly: `${left}- ${newKey}: ${value}\n`,
-      inSecond: `${left}+ ${newKey}: ${value}\n`,
-      inSecondOnly: `${left}+ ${newKey}: ${value}\n`,
+      inBoth: result('  '),
+      inFirst: result('- '),
+      inFirstOnly: result('- '),
+      inSecond: result('+ '),
+      inSecondOnly: result('+ '),
       end: `${left}  }\n`,
     }
 

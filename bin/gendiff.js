@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { program } from 'commander'
-import { compareObjects } from '../src/index.js'
+import { compareObjects } from '../src/compare.js'
 import getObject from '../src/parsers.js'
 
 program
