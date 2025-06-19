@@ -21,3 +21,6 @@ test-watch:
 
 test-coverage:
 	npm test -- --coverage
+
+lint-json:
+	npx eslint --format json __fixtures__/file1.json
