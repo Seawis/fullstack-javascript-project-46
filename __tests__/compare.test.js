@@ -27,6 +27,7 @@ test('compareNestedJSON', () => {
   const file2 = JSON.parse(readFile(getFixturePath('file2nested.json')))
   expect(compareObjects(file1, file2)).toEqual(readFile(getFixturePath('fileNested.txt')))
   expect(compareObjects(file1, file2, 'stylish')).toEqual(readFile(getFixturePath('fileNested.txt')))
+  expect(compareObjects(file1, file2, 'json')).toEqual(readFile(getFixturePath('fileJSON.json')))
 })
 
 test('compareNestedYML', () => {
@@ -34,6 +35,7 @@ test('compareNestedYML', () => {
   const file2 = yaml.load(readFile(getFixturePath('file2nested.yml')))
   expect(compareObjects(file1, file2)).toEqual(readFile(getFixturePath('fileNested.txt')))
   expect(compareObjects(file1, file2, 'plain')).toEqual(readFile(getFixturePath('filePlain.txt')))
+  expect(compareObjects(file1, file2, 'json')).toEqual(readFile(getFixturePath('fileJSON.json')))
 })
 
 test('boom!', () => {

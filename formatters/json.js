@@ -1,25 +1,27 @@
-// import _ from 'lodash'
+import _ from 'lodash'
 
 export default (diffs) => {
   const result = diffs.reduce((acc, item, i, diffs) => {
-    const newKey = Object.hasOwn(item, 'key')
-      ? item.key // .split('.').slice(-1)
-      : null
+    const newKeys = Object.hasOwn(item, 'key')
+      ? item.key.split('.')
+      : []
+    const newObj = elem => newKeys.reverse().reduce((acc, curr) => ({ [curr]: acc }), elem)
+
     const value = item.value
     const prevValue = (diffs[i - 1] ?? diffs[i]).value
 
     const rates = {
       compareObj: '',
-      inBoth: acc[newKey] = { value, newValue: 'not changed' },
+      inBoth: { value, changes: 'not changed' },
       inFirst: '',
-      inFirstOnly: acc[newKey] = { value, newValue: 'was removed' },
-      inSecond: { value: prevValue, newValue: value },
-      inSecondOnly: acc[newKey] = { value, newValue: 'was added' },
+      inFirstOnly: { value, changes: 'was removed' },
+      inSecond: { value, changes: prevValue },
+      inSecondOnly: { value, changes: 'was added' },
       end: '',
     }
-    acc[newKey] = rates[item.where]
+
+    acc = _.merge(acc, newObj(rates[item.where]))
     return acc
   }, {})
-
-  return result // JSON.parse(result)
+  return JSON.stringify(result, null, 2)
 }
