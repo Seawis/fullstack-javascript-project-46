@@ -4,24 +4,20 @@ export default (diffs) => {
   return diffs.reduce((acc, item, i, diffs) => {
     const newKey = item.key
 
-    const value = _.isObject(item.value)
+    const value = el => _.isObject(el.value)
       ? '[complex value]'
-      : typeof item.value === 'string'
-        ? `'${item.value}'`
-        : item.value
-
+      : typeof el.value === 'string'
+        ? `'${el.value}'`
+        : el.value
     const next = diffs[i + 1] ?? diffs[i]
-    const nextValue = typeof next.value === 'string'
-      ? `'${next.value}'`
-      : next.value
 
     const rates = {
       compareObj: '',
       inBoth: '',
-      inFirst: `Property '${newKey}' was updated. From ${value} to ${nextValue}\n`,
+      inFirst: `Property '${newKey}' was updated. From ${value(item)} to ${value(next)}\n`,
       inFirstOnly: `Property '${newKey}' was removed\n`,
       inSecond: '',
-      inSecondOnly: `Property '${newKey}' was added with value: ${value}\n`,
+      inSecondOnly: `Property '${newKey}' was added with value: ${value(item)}\n`,
       end: '',
     }
 
