@@ -3,7 +3,7 @@ import path from 'path'
 import yaml from 'js-yaml'
 
 export default (filepath) => {
-  let ext = path.extname(getFilePath(filepath))
+  const ext = path.extname(getFilePath(filepath))
 
   switch (ext) {
     case '.json':

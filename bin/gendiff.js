@@ -15,5 +15,4 @@ program
     const result = compareObjects(getObject(filepath1), getObject(filepath2), program.opts().format)
     console.log(result)
   })
-
-program.parse()
+  .parse()
