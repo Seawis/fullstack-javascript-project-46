@@ -36,6 +36,9 @@ test('compareNestedYML', () => {
   expect(compareObjects(file1, file2)).toEqual(readFile(getFixturePath('fileNested.txt')))
   expect(compareObjects(file1, file2, 'plain')).toEqual(readFile(getFixturePath('filePlain.txt')))
   expect(compareObjects(file1, file2, 'json')).toEqual(readFile(getFixturePath('fileJSON.json')))
+  expect(() => {
+    compareObjects('stylishplain')
+  }).toThrow()
 })
 
 test('boom!', () => {

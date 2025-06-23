@@ -13,10 +13,12 @@ test('isObject', () => {
   const filepath2 = getFixturePath('file1.yaml')
   const filepath3 = getFixturePath('file2.yml')
   const filepath4 = getFixturePath('fileResult.txt')
+  const filepath5 = getFixturePath('file.json')
 
   expect(getObject(filepath1) instanceof Object).toBeTruthy()
   expect(getObject(filepath2) instanceof Object).toBeTruthy()
   expect(getObject(filepath3) instanceof Object).toBeTruthy()
 
   expect(() => getObject(filepath4) instanceof Object).toThrow()
+  expect(() => getObject(filepath5) instanceof Object).toThrow()
 })
