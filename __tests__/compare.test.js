@@ -25,7 +25,10 @@ test('compareYML', () => {
 test('compareNestedJSON', () => {
   const file1 = JSON.parse(readFile(getFixturePath('file1nested.json')))
   const file2 = JSON.parse(readFile(getFixturePath('file2nested.json')))
+  const file3 = JSON.parse(readFile(getFixturePath('file3.json')))
+  const file4 = JSON.parse(readFile(getFixturePath('file4.json')))
   expect(compareObjects(file1, file2)).toEqual(readFile(getFixturePath('fileNested.txt')))
+  expect(compareObjects(file3, file4)).toEqual(readFile(getFixturePath('result_stylish.txt')))
   expect(compareObjects(file1, file2, 'stylish')).toEqual(readFile(getFixturePath('fileNested.txt')))
   expect(compareObjects(file1, file2, 'json')).toEqual(readFile(getFixturePath('fileJSON.json')))
 })
@@ -33,9 +36,12 @@ test('compareNestedJSON', () => {
 test('compareNestedYML', () => {
   const file1 = yaml.load(readFile(getFixturePath('file1nested.yaml')))
   const file2 = yaml.load(readFile(getFixturePath('file2nested.yml')))
+  const file3 = yaml.load(readFile(getFixturePath('file3.yml')))
+  const file4 = yaml.load(readFile(getFixturePath('file4.yml')))
   expect(compareObjects(file1, file2)).toEqual(readFile(getFixturePath('fileNested.txt')))
   expect(compareObjects(file1, file2, 'plain')).toEqual(readFile(getFixturePath('filePlain.txt')))
   expect(compareObjects(file1, file2, 'json')).toEqual(readFile(getFixturePath('fileJSON.json')))
+  expect(compareObjects(file3, file4, 'plain')).toEqual(readFile(getFixturePath('result_plain.txt')))
   expect(() => {
     compareObjects('stylishplain')
   }).toThrow()

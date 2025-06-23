@@ -3,13 +3,19 @@ import _ from 'lodash'
 export default (diffs) => {
   return diffs.reduce((acc, item, i, diffs) => {
     const newKey = item.key
-
-    const value = el => _.isObject(el.value)
-      ? '[complex value]'
-      : typeof el.value === 'string'
-        ? `'${el.value}'`
-        : el.value
     const next = diffs[i + 1] ?? diffs[i]
+
+    const value = (el) => {
+      const val = el.value
+      if (_.isObject(val)) {
+        return '[complex value]'
+      }
+      else {
+        return typeof val === 'string'
+          ? `'${val}'`
+          : val
+      }
+    }
 
     const rates = {
       compareObj: '',
@@ -23,5 +29,5 @@ export default (diffs) => {
 
     acc += rates[item.where]
     return acc
-  }, '').trim()
+  }, '') // .trim()
 }

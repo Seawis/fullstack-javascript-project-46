@@ -10,7 +10,7 @@ const stringify = (key, obj, replacer, deep = 0) => {
     const cb = (acc, [key, val]) =>
       `${acc}${symBefore}${key}: ${converter(val, level + 1)}\n`
 
-    return (typeof value === 'object') & (value !== null)
+    return (typeof value === 'object') && (value !== null)
       ? `{\n${Object.entries(value).reduce(cb, '')}${symAfter}}`
       : String(value)
   }
@@ -45,5 +45,5 @@ export default (diffs) => {
     return acc
   }, '')
 
-  return `{\n${result}}`
+  return `{\n${result}}\n`
 }
