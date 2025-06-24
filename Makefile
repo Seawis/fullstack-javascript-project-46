@@ -14,7 +14,7 @@ lint:
 	npx eslint --fix .
 
 test:
-	npx jest
+	npx --experimental-vm-modules jest
 
 test-watch:
 	npx jest --watch
