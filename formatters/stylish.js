@@ -45,5 +45,5 @@ export default (diffs) => {
     return acc
   }, '')
 
-  return `{\n${result}}\n`
+  return `{\n${result}}`
 }
