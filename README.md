@@ -1,4 +1,4 @@
-#### Gendiff (Вычислитель отличий)
+## Gendiff (Вычислитель отличий)
 
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/Seawis/fullstack-javascript-project-46/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/Seawis/fullstack-javascript-project-46/actions)
@@ -27,18 +27,18 @@ The utility's features include:
 
 ### Usage:
 
-gendiff [options] <filepath1> <filepath2>
+**gendiff** [*option*] *"filepath1"* *"filepath2"*
 
 Compares two configuration files and shows a difference.
 
-Arguments:
-  filepath1            first file
-  filepath2            second file
+*Arguments:*
+- filepath1   -         first file
+- filepath2   -         second file
 
-Options:
-  -V, --version        output the version number
-  -f, --format [type]  output format (default: "stylish")
-  -h, --help           display help for command
+*Options:*
+-  -V, --version        (output the version number)
+-  -f, --format [type]  (output format, default: "stylish")
+-  -h, --help           (display help for command)
 
 ### How it works:
 
